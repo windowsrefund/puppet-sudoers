@@ -3,7 +3,7 @@ Puppet Sudoers Module
 
 Manage sudo entries in appropriate sudoers file
 
-I got tired of managing my sudoers file statically or via ERB templates and figure it would be nice to do something like the following:
+I am tired of managing my sudoers content via the file type and figure it would be nice to do things such as:
 
 sudo { carla:
   ensure => present,
