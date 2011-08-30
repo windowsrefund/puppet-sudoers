@@ -6,7 +6,7 @@ define sudoers::group($ensure = 'present', $nopasswd = false, $commands) {
   include sudoers
   include sudoers::params
 
-  sudoers ( $name:
+  sudoers { $name:
     ensure => $ensure,
     isgroup => true,
     nopasswd => $nopasswd,

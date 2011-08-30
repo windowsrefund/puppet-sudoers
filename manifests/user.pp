@@ -6,7 +6,7 @@ define sudoers::user($ensure = 'present', $nopasswd = false, $commands) {
   include sudoers
   include sudoers::params
 
-  sudoers ( $name:
+  sudoers { $name:
     ensure => $ensure,
     nopasswd => $nopasswd,
     commands => $commands,
