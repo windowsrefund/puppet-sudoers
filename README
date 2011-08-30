@@ -1,0 +1,25 @@
+Puppet Sudoers Module
+=====================
+
+Manage sudo entries in appropriate sudoers file
+
+I got tired of managing my sudoers file statically or via ERB templates and figure it would be nice to do something like the following:
+
+sudo { carla:
+  ensure => present,
+  nopasswd => true,
+  commands => "ALL",
+}
+
+and for a group, we can set isgroup => true
+
+In order to ensure os-specific resources are satifisied, the following definitions have been provided:
+
+sudo::user
+sudo::group
+
+Each definition makes use of the sudoers type with sudo::group making use of the isgroup parameter.
+
+
+
+
