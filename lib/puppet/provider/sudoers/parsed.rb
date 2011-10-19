@@ -22,12 +22,13 @@ Puppet::Type.type(:sudoers).provide(:parsed,
   text_line :blank, :match => /^\s*$/;
 
   record_line :parsed,
-    :fields => %w{name nopasswd commands},
+    :fields => %w{name passwd commands},
     :post_parse => proc { |h|
         h[:commands] = [h[:commands]] unless h[:commands].is_a?(Array)
+	h[:nopasswd] = h[:passwd] == "ALL=(ALL)" ? :false : :true
     },
     :pre_gen => proc { |h|
-      h[:nopasswd] = h[:nopasswd] == :true ? "ALL=NOPASSWD:" : "ALL=(ALL)"
+      h[:passwd] = h[:nopasswd] == :true ? "ALL=NOPASSWD:" : "ALL=(ALL)"
       h[:commands] = [] if h[:commands].include?(:absent)
       h[:commands] = h[:commands].join(', ')
     }
