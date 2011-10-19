@@ -1,25 +1,30 @@
 Puppet Sudoers Module
 =====================
 
-Manage sudo entries in appropriate sudoers file
+Manage sudo entries in appropriate sudoers file and ensure that the sudo
+package is installed on the system.
 
-I am tired of managing my sudoers content via the file type and figure it would be nice to do things such as:
+I am tired of managing my sudoers content via the file type and figure it would
+be nice to do things such as:
 
-sudo { carla:
+sudoers::user { carla:
   ensure => present,
   nopasswd => true,
   commands => "ALL",
 }
 
-and for a group, we can set isgroup => true
+and for a group:
 
-In order to ensure os-specific resources are satifisied, the following definitions have been provided:
+sudoers::group { wheel:
+  ensure => present,
+  nopasswd => true,
+  commands => "ALL",
+}
 
-sudo::user
-sudo::group
+In order to ensure os-specific resources are satifisied, the following
+definitions have been provided:
 
-Each definition makes use of the sudoers type with sudo::group making use of the isgroup parameter.
+sudoers::user
+sudoers::group
 
-
-
-
+Each definition makes use of the sudoers type.
