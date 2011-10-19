@@ -23,6 +23,9 @@ Puppet::Type.type(:sudoers).provide(:parsed,
 
   record_line :parsed,
     :fields => %w{name nopasswd commands},
+    :post_parse => proc { |h|
+        h[:commands] = [h[:commands]] unless h[:commands].is_a?(Array)
+    },
     :pre_gen => proc { |h|
       h[:nopasswd] = h[:nopasswd] == :true ? "ALL=NOPASSWD:" : "ALL=(ALL)"
       h[:commands] = [] if h[:commands].include?(:absent)
