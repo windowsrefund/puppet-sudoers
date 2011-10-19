@@ -24,7 +24,6 @@ Puppet::Type.type(:sudoers).provide(:parsed,
   record_line :parsed,
     :fields => %w{name nopasswd commands},
     :pre_gen => proc { |h|
-      h[:name] = "%#{h[:name]}" if h[:isgroup] == :true
       h[:nopasswd] = h[:nopasswd] == :true ? "ALL=NOPASSWD:" : "ALL=(ALL)"
       h[:commands] = [] if h[:commands].include?(:absent)
       h[:commands] = h[:commands].join(', ')

@@ -15,18 +15,6 @@ module Puppet
 			end
 		end
 
-    newproperty(:isgroup, :boolean => :true) do
-      desc "name is a group."
-
-      newvalues(:true, :false)
-      defaultto :false
-
-			munge do |val|
-				@resource.munge_boolean(val)
-			end
-
-    end
-
     newproperty(:nopasswd, :boolean => :true) do
       desc "NOPASSWD option."
 
