@@ -4,7 +4,7 @@ class sudoers::os inherits sudoers {
 
   include sudoers::params
 
-  case $operatingsystem {
+  case $::operatingsystem {
 
     solaris: {
 
