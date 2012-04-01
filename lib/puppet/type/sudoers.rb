@@ -4,16 +4,16 @@ module Puppet
 
     ensurable
 
-		def munge_boolean(value)
-			case value
-				when true, "true", :true
-					:true
-				when false, "false", :false
-					:false
-			else
-				fail("munge_boolean only takes booleans")
-			end
-		end
+    def munge_boolean(value)
+      case value
+        when true, "true", :true
+          :true
+        when false, "false", :false
+          :false
+        else
+          fail("munge_boolean only takes booleans")
+        end
+    end
 
     newproperty(:nopasswd, :boolean => :true) do
       desc "NOPASSWD option."
@@ -21,9 +21,9 @@ module Puppet
       newvalues(:true, :false)
       defaultto :false
 
-			munge do |val|
-				@resource.munge_boolean(val)
-			end
+      munge do |val|
+        @resource.munge_boolean(val)
+      end
     end
 
     newproperty(:target) do
@@ -58,10 +58,7 @@ module Puppet
     end
 
     validate do
-      # Go ahead if commands attribute is defined
-
       return if @parameters[:commands].shouldorig[0] != :absent
-
       raise Puppet::Error, "The sudoers type requires the 'commands' attribute."
     end
 
