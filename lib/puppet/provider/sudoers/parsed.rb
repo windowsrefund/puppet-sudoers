@@ -18,7 +18,7 @@ Puppet::Type.type(:sudoers).provide(:parsed,
 
   desc "The sudoers provider that used the ParsedFile class."
 
-  text_line :comment, :match => /^#/;
+  text_line :comment, :match => /^(#|Defaults)/;
   text_line :blank, :match => /^\s*$/;
 
   record_line :parsed,
