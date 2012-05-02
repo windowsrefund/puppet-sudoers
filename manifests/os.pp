@@ -1,10 +1,10 @@
 # OS-specific resources and overrides
 #
-class sudoers::os inherits sudo {
+class sudoers::os inherits sudoers {
 
   include sudoers::params
 
-  case $operatingsystem {
+  case $::operatingsystem {
 
     solaris: {
 
