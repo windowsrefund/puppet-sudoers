@@ -18,15 +18,18 @@ Puppet::Type.type(:sudoers).provide(:parsed,
 
   desc "The sudoers provider that used the ParsedFile class."
 
-  text_line :comment, :match => /^(#|Defaults)/;
-  text_line :blank, :match => /^\s*$/;
+  text_line :comment, :match => /^#/
+  text_line :blank, :match => /^\s*$/
+  text_line :default, :match => /Defaults\s.*/
 
   record_line :parsed,
     :fields => %w{name passwd commands},
+
     :post_parse => proc { |h|
         h[:commands] = [h[:commands]] unless h[:commands].is_a?(Array)
 	h[:nopasswd] = h[:passwd] == "ALL=(ALL)" ? :false : :true
     },
+
     :pre_gen => proc { |h|
       h[:passwd] = h[:nopasswd] == :true ? "ALL=NOPASSWD:" : "ALL=(ALL)"
       h[:commands] = [] if h[:commands].include?(:absent)
