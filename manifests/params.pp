@@ -1,7 +1,7 @@
 class sudoers::params {
   
   case $::operatingsystem {
-    debian, ubuntu: {
+    debian, ubuntu, centos: {
       $packages = 'sudo'
     }
 
